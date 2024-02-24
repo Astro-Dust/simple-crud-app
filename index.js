@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose'); // ajuda a se comunicar com o mongoDB
@@ -19,7 +20,7 @@ app.get('/', (req, res) => {
   res.send('Hello from Node API Server');
 });
 
-mongoose.connect('mongodb+srv://admin:NRp1qltTcaGRPvba@backenddb.4g8ty68.mongodb.net/Node-API?retryWrites=true&w=majority&appName=BackendDB')
+mongoose.connect(`mongodb+srv://admin:${process.env.MONGO_KEY}@backenddb.4g8ty68.mongodb.net/Node-API?retryWrites=true&w=majority&appName=BackendDB`)
 .then(() => {
   // localhost:3000
   app.listen(3000, () => {
@@ -28,5 +29,5 @@ mongoose.connect('mongodb+srv://admin:NRp1qltTcaGRPvba@backenddb.4g8ty68.mongodb
   console.log('Connected to database!');
 })
 .catch(() => {
-  console.log('Connection failed.')
+  console.log('Connection failed.');
 })
